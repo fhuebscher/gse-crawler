@@ -52,14 +52,14 @@ def get_elements_from_url(url, elements):
 
 if __name__ == "__main__":
 
-  url = 'https://www.uni-mannheim.de'
-  text = get_text_from_url(url)
-  print(text)
+    url = 'https://www.uni-mannheim.de'
+    text = get_text_from_url(url)
+    print(text)
 
-  links = get_links_from_url(url)
-  print(links)
+    links = get_links_from_url(url)
+    print(links)
 
-  # more elements can be added
-  elements = ['h1', 'h2']
-  headers = get_elements_from_url(url, elements)
-  print(headers)
+    # more elements can be added
+    elements = ['h1', 'h2']
+    headers = get_elements_from_url(url, elements)
+    print(headers)

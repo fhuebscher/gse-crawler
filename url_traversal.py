@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 class GSECrawler(scrapy.Spider):
     name = 'gse-crawler'
-    start_urls = ['http://www.example.com']
+    start_urls = ['https://www.uni-mannheim.de/']
 
     def parse(self, response):
         # Extract text content from the page
