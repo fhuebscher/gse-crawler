@@ -58,6 +58,7 @@ class Trie(object):
         """
         if node.is_end:
             self.output.append((prefix + node.char, node.counter))
+            return
         
         for child in node.children.values():
             self.dfs(child, prefix + node.char)
