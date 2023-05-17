@@ -1,3 +1,16 @@
+from collections import defaultdict
+
+class IDFTFDict(defaultdict):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def __truediv__(self,divisor):
+        a = {}
+        for i in self:
+            a[i] = self[i]/divisor
+
+        return a
+
 class TrieNode:
     """A node in the trie structure"""
 
@@ -11,6 +24,7 @@ class TrieNode:
         # a counter indicating how many times a word is inserted
         # (if this node's is_end is True)
         self.counter = 0
+        self.pageCount = IDFTFDict(int)
 
         # a dictionary of child nodes
         # keys are characters, values are nodes
@@ -26,7 +40,7 @@ class Trie(object):
         """
         self.root = TrieNode("")
     
-    def insert(self, word):
+    def insert(self, word, nodenum):
         """Insert a word into the trie"""
         node = self.root
         
@@ -47,6 +61,7 @@ class Trie(object):
 
         # Increment the counter to indicate that we see this word once more
         node.counter += 1
+        node.pageCount[nodenum] += 1
         
     def dfs(self, node, prefix):
         """Depth-first traversal of the trie
@@ -57,7 +72,7 @@ class Trie(object):
                 word while traversing the trie
         """
         if node.is_end:
-            self.output.append((prefix + node.char, node.counter))
+            self.output = [prefix + node.char, node.pageCount/node.counter]
             return
         
         for child in node.children.values():
@@ -81,8 +96,9 @@ class Trie(object):
                 # cannot found the prefix, return empty list
                 return []
         
-        # Traverse the trie to get all candidates
+        # Traverse the trie to get the term
         self.dfs(node, x[:-1])
 
+
         # Sort the results in reverse order and return
-        return sorted(self.output, key=lambda x: x[1], reverse=True)
+        return self.output
