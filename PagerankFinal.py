@@ -57,7 +57,7 @@ for i in range(55):
 
 
 a = sorted(enumerate(nMatrix),key=lambda x:x[1],reverse=True)
-for i in range(20):
-    print(nodeMap[a[i][0] + 1])
+for i in range(50):
+    print(nodeMap[a[i][0]])
     
 
