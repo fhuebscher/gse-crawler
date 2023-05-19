@@ -1,15 +1,5 @@
 from collections import defaultdict
-
-class IDFTFDict(defaultdict):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def __truediv__(self,divisor):
-        a = {}
-        for i in self:
-            a[i] = self[i]/divisor
-
-        return a
+import numpy as np
 
 class TrieNode:
     """A node in the trie structure"""
@@ -24,16 +14,16 @@ class TrieNode:
         # a counter indicating how many times a word is inserted
         # (if this node's is_end is True)
         self.counter = 0
-        self.pageCount = IDFTFDict(int)
+        self.pageCount = defaultdict(float)
 
         # a dictionary of child nodes
         # keys are characters, values are nodes
         self.children = {}
 
     def addCount(self, node, amount):
-        self.counter += amount
         self.pageCount[node] += amount
-        
+
+
 
 class Trie(object):
     """The trie object"""
@@ -64,9 +54,14 @@ class Trie(object):
         # Mark the end of a word
         node.is_end = True
 
-        # Increment the counter to indicate that we see this word once more
+        # Increment the counter to indicate that we see the word in the document
         node.counter += 1
+
+        # Increment the count here to show how many times the number was found
         node.pageCount[nodenum] += 1
+
+        return node
+
 
     def get(self, word):
         """Insert a word into the trie"""
@@ -89,6 +84,7 @@ class Trie(object):
 
         return node
         
+
     def dfs(self, node, prefix):
         """Depth-first traversal of the trie
         
@@ -98,12 +94,13 @@ class Trie(object):
                 word while traversing the trie
         """
         if node.is_end:
-            self.output = [prefix + node.char, node.pageCount/node.counter]
+            self.output = [prefix + node.char, node.pageCount, node.count]
             return
         
         for child in node.children.values():
             self.dfs(child, prefix + node.char)
         
+
     def query(self, x):
         """Given an input (a prefix), retrieve all words stored in
         the trie with that prefix, sort the words by the number of 
@@ -128,3 +125,11 @@ class Trie(object):
 
         # Sort the results in reverse order and return
         return self.output
+
+
+
+def IDF(count, globcount):
+    try:
+        return np.log(globcount/count)
+    except:
+        return 0

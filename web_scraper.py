@@ -3,8 +3,6 @@ from bs4 import BeautifulSoup
 
 url = "https://en.wikipedia.org/wiki/My_Neighbor_Totoro"
 
-print(Get_info(url).get('section_titles'))
-
 
 def Get_info(url):
   #Initialise Various Arrays to hold data for dictionary
