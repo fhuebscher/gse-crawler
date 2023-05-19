@@ -30,6 +30,11 @@ class TrieNode:
         # keys are characters, values are nodes
         self.children = {}
 
+    def addCount(self, node, amount):
+        self.counter += amount
+        self.pageCount[node] += amount
+        
+
 class Trie(object):
     """The trie object"""
 
@@ -62,6 +67,27 @@ class Trie(object):
         # Increment the counter to indicate that we see this word once more
         node.counter += 1
         node.pageCount[nodenum] += 1
+
+    def get(self, word):
+        """Insert a word into the trie"""
+        node = self.root
+        
+        # Loop through each character in the word
+        # Check if there is no child containing the character, create a new child for the current node
+        for char in word:
+            if char in node.children:
+                node = node.children[char]
+            else:
+                # If a character is not found,
+                # create a new node in the trie
+                new_node = TrieNode(char)
+                node.children[char] = new_node
+                node = new_node
+        
+        # Mark the end of a word
+        node.is_end = True
+
+        return node
         
     def dfs(self, node, prefix):
         """Depth-first traversal of the trie
