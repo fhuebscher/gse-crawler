@@ -110,13 +110,10 @@ if __name__ == '__main__':
             thread.join()
             lC += 1
 
-    import resource
     import sys
 
     max_rec = 0x100000
 
-    # May segfault without this line. 0x100 is a guess at the size of each stack frame.
-    resource.setrlimit(resource.RLIMIT_STACK, [0x100 * max_rec, resource.RLIM_INFINITY])
     sys.setrecursionlimit(max_rec)
 
     pickle.dump([globTrie, validDocs], open("tfidfVals",'wb'))

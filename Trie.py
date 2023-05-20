@@ -123,11 +123,3 @@ class Trie(object):
 
         # Sort the results in reverse order and return
         return self.output
-
-
-
-def IDF(count, globcount):
-    try:
-        return np.log(globcount/count)
-    except:
-        return 0

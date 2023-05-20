@@ -16,6 +16,8 @@ if __name__ == "__main__":
     #Amount of nodes
     N = 9664
 
+    #Each list in the list shows what index node transitions to it.
+    #Each column must add up to 1, each column is the out going transitions of that columns node
     with open(path,'r') as f:
         for l in f.readlines():
             if l:
