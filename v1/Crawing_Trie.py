@@ -1,11 +1,10 @@
 import pandas as pd
-from bs4_text_crawling import Crawler 
+from v1.bs4_text_crawling import Crawler 
 from Trie import Trie
 import json
 
 def get_url_node(path, crawler, trie, elements = ['h1', 'h2', 'title']):
 
-  json_data_store = {}
 
   column_names = ["type", "id", "link"]
   graph = pd.read_csv(path, sep=" ", header=0, names=column_names)

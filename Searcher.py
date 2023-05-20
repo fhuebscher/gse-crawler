@@ -1,4 +1,4 @@
-from PagerankFinal import *
+from Pagerank import *
 from Trie import *
 import pickle
 

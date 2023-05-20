@@ -1,19 +1,23 @@
-from PagerankFinal import *
+from Pagerank import *
 from Trie import *
-from web_scraper import *
+from WebScraper import *
 import pickle
 import threading
 # import multiprocessing
 
 globTrie = Trie()
+crawler = WebScraper()
 validDocs = 0
 
+# add json.load_dump as optional parameter
 def insertPage(i):
     d = {}
     wordC = 0
 
+    # Scrape web pages
     try:
-        info = Get_info(nodeMap[i])
+        info = crawler.get_web_content(nodeMap[i])
+        # get content from json dict which has been loaded previously
     except:
         return
 
@@ -116,4 +120,7 @@ if __name__ == '__main__':
 
     sys.setrecursionlimit(max_rec)
 
-    pickle.dump([globTrie, validDocs], open("data_store/tfidfVals",'wb'))
+    # check with saved json dump
+    tfid_data_store_path = 'data_store/tfidfVals_v2'
+
+    pickle.dump([globTrie, validDocs], open(tfid_data_store_path,'wb'))

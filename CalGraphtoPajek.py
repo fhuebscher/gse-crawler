@@ -1,3 +1,5 @@
+# Gephi accuracy comparison (validation)
+
 with open("datasets/CaliforniaGraph/CaliforniaGraph",'r') as f:
     with open("datasets/CaliforniaGraph/CaliforniaGraph.net",'w') as w:
         nodeMode = True
