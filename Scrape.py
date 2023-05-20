@@ -116,4 +116,4 @@ if __name__ == '__main__':
 
     sys.setrecursionlimit(max_rec)
 
-    pickle.dump([globTrie, validDocs], open("tfidfVals",'wb'))
+    pickle.dump([globTrie, validDocs], open("data_store/tfidfVals",'wb'))

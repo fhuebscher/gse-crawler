@@ -2,8 +2,8 @@ from PagerankFinal import *
 from Trie import *
 import pickle
 
-normMatrix, nodeMap = pickle.load(open("./pagerankVals",'rb'))
-globTrie, validDocs = pickle.load(open("./tfidfVals",'rb'))
+normMatrix, nodeMap = pickle.load(open("data_store/pagerankVals",'rb'))
+globTrie, validDocs = pickle.load(open("data_store/tfidfVals",'rb'))
 
 def TFIDFPageRank(count, globcount, tfDict):
     try:

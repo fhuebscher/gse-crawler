@@ -1,5 +1,5 @@
-with open("CaliforniaGraph",'r') as f:
-    with open("CalGraph.net",'w') as w:
+with open("datasets/CaliforniaGraph/CaliforniaGraph",'r') as f:
+    with open("datasets/CaliforniaGraph/CaliforniaGraph.net",'w') as w:
         nodeMode = True
         w.write("*Vertices 9664\n")
         for i in f.readlines():

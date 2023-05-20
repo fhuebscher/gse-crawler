@@ -2,11 +2,11 @@ import numpy as np
 from collections import defaultdict
 import pickle
 
-normMatrix, nodeMap= pickle.load(open("./pagerankVals",'rb'))
+normMatrix, nodeMap= pickle.load(open("data_store/pagerankVals",'rb'))
 
 if __name__ == "__main__":        
     #Setup
-    path = "./CaliforniaGraph"
+    path = "datasets/CaliforniaGraph/CaliforniaGraph"
 
     #Mapping from node to page
     nodeMap = {}
@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     normMatrix = (nMatrix - mi)/(ma - mi)
 
-    pickle.dump([normMatrix,nodeMap], open('pagerankVals','wb'))
+    pickle.dump([normMatrix,nodeMap], open('data_store/pagerankVals','wb'))
 
     a = sorted(enumerate(normMatrix),key=lambda x:x[1],reverse=True)
     for i in range(50):

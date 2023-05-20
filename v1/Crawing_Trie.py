@@ -1,8 +1,11 @@
 import pandas as pd
 from bs4_text_crawling import Crawler 
 from Trie import Trie
+import json
 
 def get_url_node(path, crawler, trie, elements = ['h1', 'h2', 'title']):
+
+  json_data_store = {}
 
   column_names = ["type", "id", "link"]
   graph = pd.read_csv(path, sep=" ", header=0, names=column_names)
@@ -40,3 +43,8 @@ if __name__ == "__main__":
     
     # headers = get_elements_from_url(url, elements)
     # print(headers)
+
+
+to_filter_out = ['502 Bad Gateway']
+to_filter_out_strict = ['502 Bad Gateway', 'Not Found', 'Just a moment...']
+#length of concat string < 100
