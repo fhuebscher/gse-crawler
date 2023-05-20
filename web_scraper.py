@@ -13,7 +13,7 @@ def Get_info(url):
     section_titles = []
     
     #This can be changed for a basic html input file rather than a request
-    page = requests.get(url)
+    page = requests.get(url, timeout=10)
 
     #Convert html doc content into a soup object
     content = BeautifulSoup(page.content, "html.parser")

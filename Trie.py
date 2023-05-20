@@ -25,6 +25,7 @@ class TrieNode:
 
 
 
+
 class Trie(object):
     """The trie object"""
 
@@ -35,7 +36,7 @@ class Trie(object):
         """
         self.root = TrieNode("")
     
-    def insert(self, word, nodenum):
+    def insert(self, word):
         """Insert a word into the trie"""
         node = self.root
         
@@ -56,9 +57,6 @@ class Trie(object):
 
         # Increment the counter to indicate that we see the word in the document
         node.counter += 1
-
-        # Increment the count here to show how many times the number was found
-        node.pageCount[nodenum] += 1
 
         return node
 
