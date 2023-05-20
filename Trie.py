@@ -25,6 +25,7 @@ class TrieNode:
 
 
 
+
 class Trie(object):
     """The trie object"""
 
@@ -35,7 +36,7 @@ class Trie(object):
         """
         self.root = TrieNode("")
     
-    def insert(self, word, nodenum):
+    def insert(self, word):
         """Insert a word into the trie"""
         node = self.root
         
@@ -56,9 +57,6 @@ class Trie(object):
 
         # Increment the counter to indicate that we see the word in the document
         node.counter += 1
-
-        # Increment the count here to show how many times the number was found
-        node.pageCount[nodenum] += 1
 
         return node
 
@@ -125,11 +123,3 @@ class Trie(object):
 
         # Sort the results in reverse order and return
         return self.output
-
-
-
-def IDF(count, globcount):
-    try:
-        return np.log(globcount/count)
-    except:
-        return 0
