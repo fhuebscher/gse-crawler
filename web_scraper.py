@@ -15,6 +15,9 @@ def Get_info(url):
     #This can be changed for a basic html input file rather than a request
     page = requests.get(url, timeout=10)
 
+    if page.status_code != 200:
+      raise Exception("Page did not load")
+
     #Convert html doc content into a soup object
     content = BeautifulSoup(page.content, "html.parser")
 
