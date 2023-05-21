@@ -44,9 +44,15 @@ def TFInheritance(trieNode):
 
     return trieNode.pageCount
 
+def query(string):
+    a = globTrie.get(string)
+    a = TFIDFPageRank(a.counter,validDocs,a.pageCount)
+    a = sorted(a, key=lambda x: a[x], reverse=True)
+    return [nodeMap[i] for i in a]
+
 
 normMatrix, nodeMap = pickle.load(open("data_store/pagerankVals",'rb'))
-globTrie, validDocs = pickle.load(open("data_store/tfidfVals",'rb'))
+globTrie, validDocs = pickle.load(open("data_store/tfidfVals_precrawled",'rb'))
 
 #Parent nodes inherit a portion of child node values, basically math is gets a tf value if maths has a tf value on the page
 TFInheritance(globTrie.root)
