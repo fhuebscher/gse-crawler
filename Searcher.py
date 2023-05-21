@@ -2,15 +2,16 @@ from Pagerank import *
 from Trie import *
 import pickle
 
-normMatrix, nodeMap = pickle.load(open("data_store/pagerankVals",'rb'))
-globTrie, validDocs = pickle.load(open("data_store/tfidfVals",'rb'))
 
 def TFIDFPageRank(count, globcount, tfDict):
     try:
         idf = np.log(globcount/count)
         a = {}
+        #top 10 tf values
+        cutoff = sorted(tfDict, key=lambda x: tfDict[x], reverse=True)[:10]
         for i in tfDict:
-            if normMatrix[i] == 0 or tfDict[i] == 0:
+            #Make all pages not in top 10 tf insignificant
+            if i not in cutoff:
                 a[i] = 0
                 continue
 
@@ -39,6 +40,13 @@ def TFInheritance(trieNode):
         return a
 
     for i in a:
-        trieNode.pageCount[i] = trieNode.pageCount[i] + (0.3*a[i])
+        trieNode.pageCount[i] = trieNode.pageCount[i] + (0.5*a[i])
 
     return trieNode.pageCount
+
+
+normMatrix, nodeMap = pickle.load(open("data_store/pagerankVals",'rb'))
+globTrie, validDocs = pickle.load(open("data_store/tfidfVals",'rb'))
+
+#Parent nodes inherit a portion of child node values, basically math is gets a tf value if maths has a tf value on the page
+TFInheritance(globTrie.root)
